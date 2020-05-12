@@ -34,33 +34,32 @@ function resetGrid(event) {
     }
 }
 
-function resizeGrid(event){
+function resizeGrid(event) {
     let validInput = false;
     let input = Number(prompt("Please enter a positive integer up to 64"));
-    while(!validInput){
-        if(typeof input == 'number' && (input > 0 && input <= 64)){
-            validInput = true;
-        } else {
-            input = Number(prompt("Please try again and enter a positive number up to 100"));
+    if (typeof input == 'number' && (input > 0 && input <= 64)) {
+        validInput = true;
+    } else {
+        alert("Invalid number. Please try again.");
+    }
+
+    if (validInput) {
+        const deleteAll = document.querySelectorAll(".gridPiece");
+        for (let singleNode of deleteAll) {
+            singleNode.remove();
         }
+
+        drawGrid(input);
     }
-    const deleteAll = document.querySelectorAll(".gridPiece");
-    for (let singleNode of deleteAll) {
-        singleNode.remove();
-    }
-    drawGrid(input);
+
 }
 
 initialdraw();
 
 const resizeButton = document.querySelector("#resizeButton");
 resizeButton.addEventListener('click', resizeGrid);
+
 const resetButton = document.querySelector("#resetButton");
 resetButton.addEventListener('click', resetGrid);
-
-// const allDiv = document.querySelectorAll("div");
-// for (let singleNode of allDiv) {
-//     singleNode.classList.replace('normalBox', 'hoverBox');
-// }
 
 
