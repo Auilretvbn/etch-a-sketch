@@ -1,5 +1,5 @@
 function initialdraw() {
-    drawGrid(25);
+    drawGrid(32);
 }
 
 function drawGrid(gridSize) {
@@ -14,7 +14,7 @@ function drawGrid(gridSize) {
     for (let i = 0; i < gridSize; ++i) {
         for (let j = 0; j < gridSize; ++j) {
             div = document.createElement('div');
-            div.className = 'normalBox';
+            div.className = 'normalBox gridPiece';
             div.addEventListener('mouseenter', changeColor);
             fragmentBox.appendChild(div);
         }
@@ -34,16 +34,29 @@ function resetGrid(event) {
     }
 }
 
-function resizeGrid(gridSize){
-    
+function resizeGrid(event){
+    let validInput = false;
+    let input = Number(prompt("Please enter a positive integer up to 64"));
+    while(!validInput){
+        if(typeof input == 'number' && (input > 0 && input <= 64)){
+            validInput = true;
+        } else {
+            input = Number(prompt("Please try again and enter a positive number up to 100"));
+        }
+    }
+    const deleteAll = document.querySelectorAll(".gridPiece");
+    for (let singleNode of deleteAll) {
+        singleNode.remove();
+    }
+    drawGrid(input);
 }
 
 initialdraw();
 
-resetButton = document.querySelector("#Reset");
+const resizeButton = document.querySelector("#resizeButton");
+resizeButton.addEventListener('click', resizeGrid);
+const resetButton = document.querySelector("#resetButton");
 resetButton.addEventListener('click', resetGrid);
-
-resizeButton = document.querySelector("#Resize");
 
 // const allDiv = document.querySelectorAll("div");
 // for (let singleNode of allDiv) {
