@@ -1,6 +1,7 @@
 body {
 
     background-color: lightblue;
+    font-family: arial;
 }
 
 h1 {
@@ -14,6 +15,7 @@ h1 {
 p {
     margin-top: 25px;
     text-align:center;
+    font-style: italic;
 }
 
 .buttons {
