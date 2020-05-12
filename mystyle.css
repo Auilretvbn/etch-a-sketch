@@ -10,6 +10,11 @@ body {
 }
 
 .normalBox {
-    border: 3px solid green;
-    background-color: teal;
+    border: 1px solid rgb(18, 43, 18);
+    background-color: white;
+}
+
+.hoverBox {
+    background-color: black;
+    border: 1px solid white;
 }

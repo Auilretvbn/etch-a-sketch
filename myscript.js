@@ -1,35 +1,53 @@
-let gridSize = 16;
+function initialdraw() {
+    drawGrid(25);
+}
 
-container = document.querySelector(".container");
-container.style.display='grid';
-container.style['grid-template-columns']=`repeat(${gridSize}, 1fr)`;
-container.style['grid-template-rows']=`repeat(${gridSize}, 1fr)`;
-container.style['grid-auto-flow']='row';
+function drawGrid(gridSize) {
+    container = document.querySelector(".container");
+    container.style.display = 'grid';
+    container.style['grid-template-columns'] = `repeat(${gridSize}, 1fr)`;
+    container.style['grid-template-rows'] = `repeat(${gridSize}, 1fr)`;
+    container.style['grid-auto-flow'] = 'row';
 
-fragmentBox = document.createDocumentFragment();
+    fragmentBox = document.createDocumentFragment();
 
-for (let i = 0; i < gridSize; ++i){
-    for (let j = 0; j < gridSize; ++j){
-        div = document.createElement('div');
-        div.className = 'normalBox';
-        div.textContent = `${i} , ${j}`;
-        fragmentBox.appendChild(div);
+    for (let i = 0; i < gridSize; ++i) {
+        for (let j = 0; j < gridSize; ++j) {
+            div = document.createElement('div');
+            div.className = 'normalBox';
+            div.addEventListener('mouseenter', changeColor);
+            fragmentBox.appendChild(div);
+        }
+    }
+    container.appendChild(fragmentBox);
+}
+
+function changeColor(event) {
+    activeDiv = event.target;
+    activeDiv.classList.replace('normalBox', 'hoverBox');
+}
+
+function resetGrid(event) {
+    const allDiv = document.querySelectorAll("div");
+    for (let singleNode of allDiv) {
+        singleNode.classList.replace('hoverBox', 'normalBox');
     }
 }
 
-container.appendChild(fragmentBox);
-// const box = document.createElement('div');
-// const box2 = document.createElement('div');
-// const box3 = document.createElement('div');
-// const box4 = document.createElement('div');
+function resizeGrid(gridSize){
+    
+}
 
-// box.textContent = "BOX1";
-// box.style.border = "solid";
-// box2.textContent = "BOX2";
-// box3.textContent = "BOX3";
-// box4.textContent = "BOX4";
+initialdraw();
 
-// container.appendChild(box);
-// container.appendChild(box2);
-// container.appendChild(box3);
-// container.appendChild(box4);
+resetButton = document.querySelector("#Reset");
+resetButton.addEventListener('click', resetGrid);
+
+resizeButton = document.querySelector("#Resize");
+
+// const allDiv = document.querySelectorAll("div");
+// for (let singleNode of allDiv) {
+//     singleNode.classList.replace('normalBox', 'hoverBox');
+// }
+
+
